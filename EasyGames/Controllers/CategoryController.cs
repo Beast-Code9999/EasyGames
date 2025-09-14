@@ -19,7 +19,7 @@ namespace EasyGames.Controllers
         {
             // Retrieves all categories from the database as a list
             List<Category> objCategoryList = _db.Categories.ToList();
-            return View();
+            return View(objCategoryList);
         }
     }
 }
