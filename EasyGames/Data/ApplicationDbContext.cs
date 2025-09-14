@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EasyGames.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EasyGames.Data
 {
@@ -10,5 +11,7 @@ namespace EasyGames.Data
         {
             
         }
+
+        public DbSet<Category> Categories { get; set; } // Type = DbSet, Entity = Category class
     }
 }
