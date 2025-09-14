@@ -6,7 +6,7 @@ namespace EasyGames.Controllers
     {
         public IActionResult Index() // action is Index
         {
-            return View(); :wq
+            return View();
         }
     }
 }
