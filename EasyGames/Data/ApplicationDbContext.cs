@@ -13,5 +13,16 @@ namespace EasyGames.Data
         }
 
         public DbSet<Category> Categories { get; set; } // Type = DbSet, Entity = Category class
+
+
+        // Seeds initial Category data into the database when the model is created
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Category>().HasData(
+                    new Category { Id = 1, Name = "Books", DisplayOrder = 1 },
+                    new Category { Id = 2, Name = "Games", DisplayOrder = 2 },
+                    new Category { Id = 3, Name = "Toys", DisplayOrder = 3 }
+                );
+        }
     }
 }
