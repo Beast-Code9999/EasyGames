@@ -1,10 +1,21 @@
-﻿<!-- Add temporary data to show notification of CRUD functionality -->
-@if (TempData["Success"] != null)
+﻿@if (TempData["Success"] != null)
 {
-    <h3>@TempData["Success"]</h3>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <script type="text/javascript">
+         @* The toastr.success method shows a green pop-up *@
+        toastr.success('@TempData["Success"]');
+    </script>
 }
 
 @if (TempData["Error"] != null)
 {
-    <h3>@TempData["Error"]</h3>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <script type="text/javascript">
+         @* The toastr.error method shows a red pop-up *@
+        toastr.error('@TempData["Error"]');
+    </script>
 }
