@@ -12,11 +12,13 @@
             <div class="mb-3">
                 <label asp-for="Name" for="categoryName" class="form-label text-light"></label>
                 <input asp-for="Name" type="text" id="categoryName" class="form-control bg-dark bg-opacity-25 border-secondary text-light" placeholder="Enter category name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
                 <label asp-for="DisplayOrder" for="displayOrder" class="form-label text-light"></label>
                 <input asp-for="DisplayOrder" id="displayOrder" class="form-control bg-dark bg-opacity-25 border-secondary text-light" placeholder="Enter display order" />
+                <span asp-validation-for="DisplayOrder" class="text-danger"></span>
             </div>
 
             <!-- Responsive button layout using bootstrap -->

@@ -31,9 +31,14 @@ namespace EasyGames.Controllers
         [HttpPost]
         public IActionResult Create(Category obj)
         {
-            _db.Categories.Add(obj);
-            _db.SaveChanges();
-            return RedirectToAction("Index"); // redirects back to index
+            // first check if obj is valid 
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index"); // redirects back to index
+            }
+            return View();
         }
 
     }
