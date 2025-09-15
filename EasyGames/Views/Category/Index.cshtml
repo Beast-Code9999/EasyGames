@@ -1,10 +1,6 @@
 ﻿@model List<Category>
 
-<!-- Add temporary data to show notification of CRUD functionality -->
-@if(TempData["Success"]!=null)
-{
-    <h3>@TempData["Success"]</h3>
-}
+<partial name="_Notification"/>
 
 <div class="container">
     <div class="row pt-4 pb-3">
