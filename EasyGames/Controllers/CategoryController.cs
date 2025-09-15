@@ -71,11 +71,49 @@ namespace EasyGames.Controllers
             // first check if obj is valid 
             if (ModelState.IsValid)
             {
-                _db.Categories.Add(obj);
+                // update the category
+                _db.Categories.Update(obj);
                 _db.SaveChanges();
                 return RedirectToAction("Index"); // redirects back to index
             }
             return View();
+        }
+
+
+        // Handle Delete
+        public IActionResult Delete(int? id) // nullable field
+        {
+            // check if ID exists
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            Category? categoryFromDb = _db.Categories.Find(id);
+
+            if (categoryFromDb == null) // if category is null
+            {
+                return NotFound();
+            }
+
+            return View(categoryFromDb);
+        }
+        // Handle Post requests for Delete
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeletePOST(int? id)
+        {
+            Category? obj = _db.Categories.Find(id);
+            // check if null
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            // if not null
+            // Removes category from the Category table
+            _db.Categories.Remove(obj);
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }
