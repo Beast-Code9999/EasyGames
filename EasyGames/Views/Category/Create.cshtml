@@ -9,6 +9,9 @@
                 <hr class="text-secondary" />
             </div>
 
+            <!-- Add validation summary -->
+            <div asp-validation-summary="All"></div>
+
             <div class="mb-3">
                 <label asp-for="Name" for="categoryName" class="form-label text-light"></label>
                 <input asp-for="Name" type="text" id="categoryName" class="form-control bg-dark bg-opacity-25 border-secondary text-light" placeholder="Enter category name" />
