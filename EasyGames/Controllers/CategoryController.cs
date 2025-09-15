@@ -36,6 +36,8 @@ namespace EasyGames.Controllers
             {
                 _db.Categories.Add(obj);
                 _db.SaveChanges();
+                // add temporary data to show if successful
+                TempData["Success"] = "The category was created successfully!";
                 return RedirectToAction("Index"); // redirects back to index
             }
             return View();
@@ -74,6 +76,7 @@ namespace EasyGames.Controllers
                 // update the category
                 _db.Categories.Update(obj);
                 _db.SaveChanges();
+                TempData["Success"] = "The category was updated successfully!";
                 return RedirectToAction("Index"); // redirects back to index
             }
             return View();
@@ -112,6 +115,7 @@ namespace EasyGames.Controllers
             // Removes category from the Category table
             _db.Categories.Remove(obj);
             _db.SaveChanges();
+            TempData["Success"] = "The category was deleted successfully!";
 
             return RedirectToAction("Index");
         }
