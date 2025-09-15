@@ -27,6 +27,14 @@ namespace EasyGames.Controllers
         {
             return View();
         }
+        // Handle Post requests
+        [HttpPost]
+        public IActionResult Create(Category obj)
+        {
+            _db.Categories.Add(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index"); // redirects back to index
+        }
 
     }
 }
