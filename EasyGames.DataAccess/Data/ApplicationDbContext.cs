@@ -1,7 +1,7 @@
 ﻿using EasyGames.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EasyGames.Data
+namespace EasyGames.DataAccess.Data
 {
     // ApplicationDbContext implements or inherits from DbContext class, a built in class inside Entity framework
     public class ApplicationDbContext : DbContext // class using microsoft entity framework core

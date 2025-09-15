@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace EasyGames.Migrations
+namespace EasyGames.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class AddCategoryTableToDb : Migration

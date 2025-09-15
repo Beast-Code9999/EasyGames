@@ -15,4 +15,10 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EasyGames.DataAccess\EasyGames.DataAccess.csproj" />
+    <ProjectReference Include="..\EasyGames.Models\EasyGames.Models.csproj" />
+    <ProjectReference Include="..\EasyGames.Utility\EasyGames.Utility.csproj" />
+  </ItemGroup>
+
 </Project>

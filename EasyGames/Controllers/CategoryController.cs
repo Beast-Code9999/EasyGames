@@ -1,4 +1,4 @@
-﻿using EasyGames.Data;
+﻿using EasyGames.DataAccess.Data;
 using EasyGames.Models;
 using Microsoft.AspNetCore.Mvc;
 
