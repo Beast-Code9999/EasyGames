@@ -41,5 +41,41 @@ namespace EasyGames.Controllers
             return View();
         }
 
+        // Handle edit/UPDATE
+        public IActionResult Edit(int? id) // nullable field
+        {
+            // check if ID exists
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            Category? categoryFromDb = _db.Categories.Find(id);
+
+            // other ways of retrieving category
+
+            //Category? categoryFromDb1 = _db.Categories.FirstOrDefault(u=>u.Id==id);
+            //Category? categoryFromDb2 = _db.Categories.Where(u=>u.Id==id).FirstOrDefault();
+
+            if (categoryFromDb == null) // if category is null
+            {
+                return NotFound();
+            }
+
+            return View(categoryFromDb);
+        }
+        // Handle Post requests
+        [HttpPost]
+        public IActionResult Edit(Category obj)
+        {
+            // first check if obj is valid 
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index"); // redirects back to index
+            }
+            return View();
+        }
     }
 }
