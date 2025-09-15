@@ -23,14 +23,26 @@
             <th>
                 Category Order
             </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
+        <!-- Loops through obj Category and display all of the categories -->
         @foreach(var obj in Model)
         {
             <tr>
                 <td>@obj.Name</td>
                 <td>@obj.DisplayOrder</td>
+                <td>
+                    <div class="w-100 btn-group" role="group">
+                        <a asp-controller="Category" asp-action="Edit" class="btn btn-dark">
+                            <i class="bi bi-pencil-square"></i> Edit
+                        </a>
+                        <a asp-controller="Category" asp-action="Delete" class="btn btn-danger">
+                            <i class="bi bi-x-square"></i> Delete
+                        </a>
+                    </div>
+                </td>
             </tr>
         }
     </tbody>
