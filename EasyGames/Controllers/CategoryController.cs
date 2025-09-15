@@ -21,5 +21,12 @@ namespace EasyGames.Controllers
             List<Category> objCategoryList = _db.Categories.ToList();
             return View(objCategoryList);
         }
+
+        // Create new category
+        public IActionResult Create()
+        {
+            return View();
+        }
+
     }
 }

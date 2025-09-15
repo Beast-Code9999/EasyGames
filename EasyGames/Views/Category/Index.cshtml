@@ -8,7 +8,8 @@
             </h2>
         </div>
         <div class="col-6 text-end">
-            <a asp-controller="" asp-action="" class="btn btn-dark">
+            @* anchor tag to tell which controller and which action this button will take the user to *@
+            <a asp-controller="Category" asp-action="Create" class="btn btn-dark">
                 <i class="bi bi-plus-square m-1"></i>Create New Category
             </a>
         </div>
@@ -32,8 +33,6 @@
                 <td>@obj.DisplayOrder</td>
             </tr>
         }
-
     </tbody>
-
 </table>
 </div>
