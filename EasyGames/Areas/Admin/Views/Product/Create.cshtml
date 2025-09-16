@@ -1,4 +1,4 @@
-﻿@model Product
+﻿@model ProductVM
 
 <!-- Create a new product form with method post -->
 <form method="post" class="container mt-5" style="max-width: 600px;">
@@ -13,20 +13,32 @@
             <div asp-validation-summary="All"></div>
 
             <div class="mb-3">
-                <label asp-for="Name" for="productName" class="form-label text-light"></label>
-                <input asp-for="Name" type="text" id="productName" class="form-control bg-dark bg-opacity-25 border-secondary text-light" placeholder="Enter product name" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="Product.Name" for="productName" class="form-label text-light"></label>
+                <input asp-for="Product.Name" type="text" id="productName" class="form-control bg-dark bg-opacity-25 border-secondary text-light" placeholder="Enter product name" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label asp-for="Description" for="Description" class="form-label text-light"></label>
-                <textarea asp-for="Description" id="Description" class="form-control bg-dark bg-opacity-25 border-secondary text-light" placeholder="Enter Description"></textarea>
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="Product.Description" for="Description" class="form-label text-light"></label>
+                <textarea asp-for="Product.Description" id="Description" class="form-control bg-dark bg-opacity-25 border-secondary text-light" placeholder="Enter Description"></textarea>
+                <span asp-validation-for="Product.Description" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Price" for="Price" class="form-label text-light"></label>
-                <input asp-for="Price" id="Price" class="form-control bg-dark bg-opacity-25 border-secondary text-light" placeholder="Enter price" />
-                <span asp-validation-for="Price" class="text-danger"></span>
+                <label asp-for="Product.Price" for="Price" class="form-label text-light"></label>
+                <input asp-for="Product.Price" id="Price" class="form-control bg-dark bg-opacity-25 border-secondary text-light" placeholder="Enter price" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Product.CategoryId" for="CategoryId" class="form-label text-light"></label>
+                <select asp-for="Product.CategoryId" asp-items="@Model.CategoryList" id="Price" class="form-select bg-dark bg-opacity-25 border-secondary text-light" placeholder="Enter price">
+                    <option disabled selected>--Select Category--</option>
+                </select>
+                <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Product.ImageUrl" for="Price" class="form-label text-light"></label>
+                <input asp-for="Product.ImageUrl" id="Price" class="form-control bg-dark bg-opacity-25 border-secondary text-light" placeholder="Enter price" />
+                <span asp-validation-for="Product.ImageUrl" class="text-danger"></span>
             </div>
 
             <!-- Responsive button layout using bootstrap -->

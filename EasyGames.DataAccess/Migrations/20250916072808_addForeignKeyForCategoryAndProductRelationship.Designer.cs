@@ -3,6 +3,7 @@ using EasyGames.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasyGames.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250916072808_addForeignKeyForCategoryAndProductRelationship")]
+    partial class addForeignKeyForCategoryAndProductRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,10 +80,6 @@ namespace EasyGames.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(40)
@@ -101,7 +100,6 @@ namespace EasyGames.DataAccess.Migrations
                             Id = 1,
                             CategoryId = 1,
                             Description = "Harry Potter is the \"Boy Who Lived,\" a young wizard with distinctive green eyes, messy black hair, and a lightning bolt-shaped scar on his forehead, who discovers his true identity after surviving an attack by the dark wizard Lord Voldemort as a baby",
-                            ImageUrl = "",
                             Name = "Harry Potter",
                             Price = 0.01m
                         },
@@ -110,7 +108,6 @@ namespace EasyGames.DataAccess.Migrations
                             Id = 2,
                             CategoryId = 2,
                             Description = "The Witcher 3: Wild Hunt is an open-world action RPG where players control Geralt of Rivia, a monster hunter searching for his adoptive daughter, Ciri, who is being pursued by the otherworldly Wild Hunt.",
-                            ImageUrl = "",
                             Name = "The Witcher 3",
                             Price = 0.02m
                         },
@@ -119,7 +116,6 @@ namespace EasyGames.DataAccess.Migrations
                             Id = 3,
                             CategoryId = 3,
                             Description = "Make Cool Tricks YOO",
-                            ImageUrl = "",
                             Name = "Yoyo",
                             Price = 0.03m
                         });

@@ -2,7 +2,9 @@
 using EasyGames.DataAccess.Repository;
 using EasyGames.DataAccess.Repository.IRepository;
 using EasyGames.Models;
+using EasyGames.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EasyGames.Areas.Admin.Controllers
 {
@@ -28,22 +30,47 @@ namespace EasyGames.Areas.Admin.Controllers
         // Create new product
         public IActionResult Create()
         {
-            return View();
+            // Fetches all categories from the database and maps them into a list 
+            // of SelectListItem objects for use in a dropdown menu. Then creates 
+            // a new ProductVM instance that holds both the category list and an 
+            // empty Product object, and finally passes this view model to the View
+            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category
+                .GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                });
+
+            ProductVM productVM = new()
+            {
+                CategoryList = CategoryList,
+                Product = new Product()
+            };
+            return View(productVM);
         }
         // Handle Post requests
         [HttpPost]
-        public IActionResult Create(Product obj)
+        public IActionResult Create(ProductVM productVM)
         {
             // first check if obj is valid 
             if (ModelState.IsValid)
             {
-                _unitOfWork.Product.Add(obj);
+                _unitOfWork.Product.Add(productVM.Product);
                 _unitOfWork.Save();
                 // add temporary data to show if successful
                 TempData["Success"] = "The product was created successfully!";
                 return RedirectToAction("Index"); // redirects back to index
             }
-            return View();
+            else // if not validated, ensure that the fields are still populated
+            {
+                productVM.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                }); 
+                return View(productVM);
+            }
+                
         }
 
         // Handle edit/UPDATE
