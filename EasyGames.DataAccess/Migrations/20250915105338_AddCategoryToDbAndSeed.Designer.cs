@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasyGames.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250914052329_SeedCategoryTable")]
-    partial class SeedCategoryTable
+    [Migration("20250915105338_AddCategoryToDbAndSeed")]
+    partial class AddCategoryToDbAndSeed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,7 +37,8 @@ namespace EasyGames.DataAccess.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.HasKey("Id");
 
@@ -59,7 +60,7 @@ namespace EasyGames.DataAccess.Migrations
                         new
                         {
                             Id = 3,
-                            DisplayOrder = 1,
+                            DisplayOrder = 3,
                             Name = "Toys"
                         });
                 });
