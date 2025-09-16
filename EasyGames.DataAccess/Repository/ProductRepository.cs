@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace EasyGames.DataAccess.Repository
 {
-    // Repository implementation for the Category entity
+    // Repository implementation for the Product entity
     // Inherits generic CRUD functionality from Repository<T>
-    // and adds Category-specific operations
+    // and adds Product-specific operations
     public class ProductRepository : Repository<Product>, IProductRepository
     {
         // Reference to the application's database context

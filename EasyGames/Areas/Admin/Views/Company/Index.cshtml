@@ -1,16 +1,14 @@
-﻿@model List<Product>
-
-<div class="container">
+﻿<div class="container">
     <div class="row pt-4 pb-3">
         <div class="col-6">
             <h2 class="">
-                Product List
+                Company List
             </h2>
         </div>
         <div class="col-6 text-end">
             @* anchor tag to tell which controller and which action this button will take the user to *@
-            <a asp-controller="Product" asp-action="Upsert" class="btn btn-dark">
-                <i class="bi bi-plus-square m-1"></i>Create New Product
+            <a asp-controller="Company" asp-action="Upsert" class="btn btn-dark">
+                <i class="bi bi-plus-square m-1"></i>Create New Company
             </a>
         </div>
     </div>
@@ -35,7 +33,7 @@
         </tr>
     </thead>
     <tbody>
-        <!-- Loops through obj Product and display all of the Product -->
+        <!-- Loops through obj Product and display all of the categories -->
         @foreach(var obj in Model)
         {
             <tr>

@@ -13,8 +13,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => // tell which class has the implementation of DbContext, which is Applicat...
        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 // include service to add identity role
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+// configure pages for login, logout, access denied path
+builder.Services.ConfigureApplicationCookie(options => {
+    options.LoginPath = $"/Identity/Account/Login";
+    options.LogoutPath = $"/Identity/Account/Logout";
+    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+});
 
 // Register configuration for razor pages
 builder.Services.AddRazorPages();

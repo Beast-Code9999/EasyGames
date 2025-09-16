@@ -1,0 +1,74 @@
+﻿@model ProductVM
+
+<!-- Create a new product form with method post -->
+<form method="post" class="container mt-5" style="max-width: 600px;" enctype="multipart/form-data">
+    <input asp-for="Product.Id" hidden/>
+    <input asp-for="Product.ImageUrl" hidden />
+
+    <div class="card bg-dark bg-opacity-50 border-0 shadow-lg rounded-4">
+        <div class="card-body p-4">
+            <div class="row pb-3 text-center">
+                <h2 class="fw-bold text-light">@(Model.Product.Id!=0?"Update":"Create") Product</h2>
+                <hr class="text-secondary" />
+            </div>
+
+            <!-- Add validation summary -->
+            <div asp-validation-summary="All"></div>
+
+            <div class="mb-3">
+                <label asp-for="Product.Name" for="productName" class="form-label text-light"></label>
+                <input asp-for="Product.Name" type="text" id="productName" class="form-control bg-dark bg-opacity-25 border-secondary text-light" placeholder="Enter product name" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Product.Description" for="Description" class="form-label text-light"></label>
+                <textarea asp-for="Product.Description" id="Description" class="form-control bg-dark bg-opacity-25 border-secondary text-light" placeholder="Enter Description"></textarea>
+                <span asp-validation-for="Product.Description" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Product.Price" for="Price" class="form-label text-light"></label>
+                <input asp-for="Product.Price" id="Price" class="form-control bg-dark bg-opacity-25 border-secondary text-light" placeholder="Enter price" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Product.CategoryId" for="CategoryId" class="form-label text-light"></label>
+                <select asp-for="Product.CategoryId" asp-items="@Model.CategoryList" id="Price" class="form-select bg-dark bg-opacity-25 border-secondary text-light" placeholder="Enter price">
+                    <option disabled selected>--Select Category--</option>
+                </select>
+                <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Product.ImageUrl" for="ImageUrl" class="form-label text-light"></label>
+                <input type="file" name="file" id="ImageUrl" class="form-control bg-dark bg-opacity-25 border-secondary text-light" placeholder="Enter price" />
+            </div>
+
+            <div class="mb-3">
+                <img src="@Model.Product.ImageUrl" width="100%"/>
+            </div>
+
+            <!-- Responsive button layout using bootstrap -->
+            <div class="d-flex flex-column flex-sm-row justify-content-between gap-2 pt-3">
+                <a asp-controller="Product" asp-action="Index"
+                   class="btn btn-outline-secondary w-100 w-sm-auto">
+                    ← Back to List
+                </a>
+                @if(Model.Product.Id != 0)
+                {
+                    <button type="submit" class="btn btn-outline-light w-100 w-sm-auto"> Update </button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-outline-light w-100 w-sm-auto"> Create </button>
+
+                }
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

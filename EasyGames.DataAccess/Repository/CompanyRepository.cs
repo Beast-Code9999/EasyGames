@@ -1,34 +1,32 @@
 ﻿using EasyGames.DataAccess.Data;
 using EasyGames.DataAccess.Repository.IRepository;
+using EasyGames.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace EasyGames.DataAccess.Repository
 {
-    public class UnitOfWork : IUnitOfWork
+    // Repository implementation for the Company entity
+    // Inherits generic CRUD functionality from Repository<T>
+    // and adds Company-specific operations
+    public class CompanyRepository : Repository<Company>, ICompanyRepository
     {
         // Reference to the application's database context
         private ApplicationDbContext _db;
-        public ICategoryRepository Category { get; private set; }
-        public ICompanyRepository Company { get; private set; }
-        public IProductRepository Product { get; private set; }
 
         // injects the DbContext and passes it to the base repository as Constructor
-        public UnitOfWork(ApplicationDbContext db)
+        public CompanyRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
-            Category = new CategoryRepository(_db);
-            Product = new ProductRepository(_db);
-            Company = new CompanyRepository(_db);
         }
 
-
-        public void Save()
+        public void Update(Company obj)
         {
-            _db.SaveChanges();
+            _db.Companies.Update(obj);
         }
     }
 }

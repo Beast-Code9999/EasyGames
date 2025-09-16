@@ -15,7 +15,9 @@ namespace EasyGames.DataAccess.Data
         }
 
         public DbSet<Category> Categories { get; set; } // Type = DbSet, Entity = Category class
-        public DbSet<Product> Products { get; set; } // Type = DbSet, Entity = Category class
+        public DbSet<Product> Products { get; set; } // Type = DbSet, Entity = Product class
+        public DbSet<Company> Companies { get; set; } // Type = DbSet, Entity = Company class
+
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         // Seeds initial Category data into the database when the model is created
