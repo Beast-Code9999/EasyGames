@@ -16,7 +16,7 @@ namespace EasyGames.DataAccess.Data
 
         public DbSet<Category> Categories { get; set; } // Type = DbSet, Entity = Category class
         public DbSet<Product> Products { get; set; } // Type = DbSet, Entity = Category class
-
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         // Seeds initial Category data into the database when the model is created
         protected override void OnModelCreating(ModelBuilder modelBuilder)

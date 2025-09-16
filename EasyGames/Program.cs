@@ -13,6 +13,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => // tell which cla
 
 builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
 
+// Register configuration for razor pages
+builder.Services.AddRazorPages();
+
 // Registers CategoryRepository as the implementation for ICategoryRepository
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -29,6 +32,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthentication();
+app.MapRazorPages();
 app.UseAuthorization();
 
 app.MapStaticAssets();
