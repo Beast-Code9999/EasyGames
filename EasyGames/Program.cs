@@ -14,7 +14,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => // tell which class has the implementation of DbContext, which is Applicat...
        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 // include service to add identity role
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
 // Register configuration for razor pages
 builder.Services.AddRazorPages();
