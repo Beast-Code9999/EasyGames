@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EasyGames.DataAccess.Repository.IRepository
 {
-    internal interface IRepository<T> where T : class
+    public interface IRepository<T> where T : class
     {
         // T will be any generic model we want to perform a CRUD operation or interact with DB context
         // IRepository<T> defines a generic contract for CRUD operations (Create, Read, Update, Delete)
