@@ -21,8 +21,6 @@ namespace EasyGames.DataAccess.Repository
             _db = db;
             Category = new CategoryRepository(_db);
             Product = new ProductRepository(_db);
-
-
         }
 
 

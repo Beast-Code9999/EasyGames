@@ -1,16 +1,16 @@
-﻿@model List<Category>
+﻿@model List<Product>
 
 <div class="container">
     <div class="row pt-4 pb-3">
         <div class="col-6">
             <h2 class="">
-                Category List
+                Product List
             </h2>
         </div>
         <div class="col-6 text-end">
             @* anchor tag to tell which controller and which action this button will take the user to *@
-            <a asp-controller="Category" asp-action="Create" class="btn btn-dark">
-                <i class="bi bi-plus-square m-1"></i>Create New Category
+            <a asp-controller="Product" asp-action="Create" class="btn btn-dark">
+                <i class="bi bi-plus-square m-1"></i>Create New Product
             </a>
         </div>
     </div>
@@ -18,28 +18,38 @@
     <thead>
         <tr>
             <th>
-                Category Name
+                Name
             </th>
             <th>
-                Category Order
+                Description
             </th>
-            <th></th>
+            <th>
+                Price
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+
+            </th>
         </tr>
     </thead>
     <tbody>
-        <!-- Loops through obj Category and display all of the categories -->
+        <!-- Loops through obj Product and display all of the categories -->
         @foreach(var obj in Model)
         {
             <tr>
                 <td>@obj.Name</td>
-                <td>@obj.DisplayOrder</td>
+                <td>@obj.Description</td>
+                <td>@obj.Price</td>
+                <td></td>
                 <td>
                     <div class="w-100 btn-group" role="group">
-                        <!-- Use asp-route- to pass the ID of each category -->
-                        <a asp-controller="Category" asp-action="Edit" asp-route-Id="@obj.Id" class="btn btn-dark">
+                        <!-- Use asp-route- to pass the ID of each product -->
+                        <a asp-controller="Product" asp-action="Edit" asp-route-Id="@obj.Id" class="btn btn-dark">
                             <i class="bi bi-pencil-square"></i> Edit
                         </a>
-                            <a asp-controller="Category" asp-action="Delete" asp-route-Id="@obj.Id" class="btn btn-danger">
+                            <a asp-controller="Product" asp-action="Delete" asp-route-Id="@obj.Id" class="btn btn-danger">
                             <i class="bi bi-x-square"></i> Delete
                         </a>
                     </div>

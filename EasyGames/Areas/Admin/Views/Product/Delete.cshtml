@@ -1,0 +1,39 @@
+﻿@model Product
+
+<!-- Create a new product form with method post -->
+<form method="post" class="container mt-5" style="max-width: 600px;">
+    <input asp-for="Id" hidden/>
+    <div class="card bg-dark bg-opacity-50 border-0 shadow-lg rounded-4">
+        <div class="card-body p-4">
+            <div class="row pb-3 text-center">
+                <h2 class="fw-bold text-light">Delete Product</h2>
+                <hr class="text-secondary" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Name" for="productName" class="form-label text-light"></label>
+                <input disabled asp-for="Name" type="text" id="productName" class="form-control bg-dark bg-opacity-25 border-secondary text-light" placeholder="Enter product name" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Description" for="Description" class="form-label text-light"></label>
+                <textarea disabled asp-for="Description" id="Description" class="form-control bg-dark bg-opacity-25 border-secondary text-light" placeholder="Enter Description"></textarea>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Price" for="Price" class="form-label text-light"></label>
+                <input disabled asp-for="Price" id="Price" class="form-control bg-dark bg-opacity-25 border-secondary text-light" placeholder="Enter price" />
+            </div>
+
+            <!-- Responsive button layout using bootstrap -->
+            <div class="d-flex flex-column flex-sm-row justify-content-between gap-2 pt-3">
+                <a asp-controller="Product" asp-action="Index"
+                   class="btn btn-outline-secondary w-100 w-sm-auto">
+                    ← Back to List
+                </a>
+                <button type="submit" class="btn-danger btn btn-outline-light w-100 w-sm-auto">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
