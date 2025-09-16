@@ -22,8 +22,8 @@ namespace EasyGames.DataAccess.Repository.IRepository
         // - Delete(entity): Removes a single entity from the database
         // - DeleteRange(entities): Removes multiple entities in a single operation
 
-        IEnumerable<T> GetAll();
-        T Get(Expression<Func<T, bool>> filter);
+        IEnumerable<T> GetAll(string? includeProperties = null);
+        T Get(Expression<Func<T, bool>> filter, string? includeProperties = null);
 
         void Add(T entity);
         void Remove(T entity);

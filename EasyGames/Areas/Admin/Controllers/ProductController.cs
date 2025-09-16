@@ -27,7 +27,7 @@ namespace EasyGames.Areas.Admin.Controllers
         public IActionResult Index() // action is Index
         {
             // Retrieves all categories from the database as a list
-            List<Product> objProductList = _unitOfWork.Product.GetAll().ToList();
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
             return View(objProductList);
         }
 
@@ -77,6 +77,18 @@ namespace EasyGames.Areas.Admin.Controllers
                     string filename = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                     string productPath = Path.Combine(wwwRootPath, @"images\product");
 
+                    // check if there is already an image or not for update functionality
+                    if (!string.IsNullOrEmpty(productVM.Product.ImageUrl))
+                    {
+                        // delete the old image
+                        var oldImagePath = Path.Combine(wwwRootPath, productVM.Product.ImageUrl.TrimStart('\\'));
+
+                        if(System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
+
                     // save image
                     using (var fileStream = new FileStream(Path.Combine(productPath, filename), FileMode.Create))
                     {
@@ -88,7 +100,16 @@ namespace EasyGames.Areas.Admin.Controllers
                     productVM.Product.ImageUrl = @"\images\product\" + filename;
                 }
 
-                _unitOfWork.Product.Add(productVM.Product);
+                // identify whether it is an add or update
+                if(productVM.Product.Id==0)
+                {
+                    _unitOfWork.Product.Add(productVM.Product);
+                }
+                else
+                {
+                    _unitOfWork.Product.Update(productVM.Product);
+                }
+
                 _unitOfWork.Save();
                 // add temporary data to show if successful
                 TempData["Success"] = "The product was created successfully!";

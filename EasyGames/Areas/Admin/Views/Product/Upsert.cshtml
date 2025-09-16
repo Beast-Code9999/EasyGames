@@ -3,6 +3,8 @@
 <!-- Create a new product form with method post -->
 <form method="post" class="container mt-5" style="max-width: 600px;" enctype="multipart/form-data">
     <input asp-for="Product.Id" hidden/>
+    <input asp-for="Product.ImageUrl" hidden />
+
     <div class="card bg-dark bg-opacity-50 border-0 shadow-lg rounded-4">
         <div class="card-body p-4">
             <div class="row pb-3 text-center">
