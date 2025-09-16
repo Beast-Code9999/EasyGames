@@ -2,8 +2,9 @@ using System.Diagnostics;
 using EasyGames.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EasyGames.Controllers
+namespace EasyGames.Areas.Customer.Controllers
 {
+    [Area("Customer")] // Tell the controller that this controller belongs to Customer
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

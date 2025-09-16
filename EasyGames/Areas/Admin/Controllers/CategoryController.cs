@@ -4,8 +4,9 @@ using EasyGames.DataAccess.Repository.IRepository;
 using EasyGames.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EasyGames.Controllers
+namespace EasyGames.Areas.Admin.Controllers
 {
+    [Area("Admin")] // Tell the controller that this controller belongs to Admin
     public class CategoryController : Controller 
     {
         // with Dotnet core we do not have to use legacy code such as
