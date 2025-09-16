@@ -2,11 +2,14 @@
 using EasyGames.DataAccess.Repository;
 using EasyGames.DataAccess.Repository.IRepository;
 using EasyGames.Models;
+using EasyGames.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EasyGames.Areas.Admin.Controllers
 {
     [Area("Admin")] // Tell the controller that this controller belongs to Admin
+    [Authorize(Roles = SD.Role_Admin)] // Only admin can access
     public class CategoryController : Controller 
     {
         // with Dotnet core we do not have to use legacy code such as
