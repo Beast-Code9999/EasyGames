@@ -1,0 +1,30 @@
+﻿@model EasyGames.Models.Product
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<div class="container my-5">
+    <div class="row">
+        <!-- Product Image -->
+        <div class="col-md-6 mb-4">
+            <div class="card border-0 shadow-lg rounded-4">
+                <img src="@Model.ImageUrl" class="card-img-top rounded-4" alt="@Model.Name" style="object-fit:cover; height:100%;" />
+            </div>
+        </div>
+
+        <!-- Product Details -->
+        <div class="col-md-6">
+            <h2 class="fw-bold">@Model.Name</h2>
+            <p class="text-muted mb-2">Category: @Model.Category.Name</p>
+            <h4 class="text-info fw-bold mb-3">Price: $@Model.Price</h4>
+            <p>@Model.Description</p>
+
+            <div class="d-flex gap-2 mt-4">
+                <a asp-area="Customer" asp-controller="Home" asp-action="Index"
+                   class="btn btn-outline-secondary">← Back to Products</a>
+                <button class="btn btn-outline-primary">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>

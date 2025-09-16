@@ -1,8 +1,34 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model IEnumerable<Product>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container my-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">Welcome to EasyGames!</h1>
+        <p class="lead">
+            Explore our wide range of products, from the latest releases to classic favorites. Find your next gaming adventure below!
+        </p>
+    </div>
+
+    <div class="row g-4">
+        <!-- Loop through products and display them in a card -->
+        @foreach (var product in Model)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card bg-dark bg-opacity-50 border-0 shadow-lg rounded-4 h-100">
+                    <img src="@product.ImageUrl" class="card-img-top rounded-top-4"
+                         alt="@product.Name" style="object-fit:cover; height:180px;" />
+                    <div class="card-body text-light d-flex flex-column">
+                        <h5 class="card-title fw-bold">@product.Name</h5>
+                        <p class="card-text flex-grow-1">@product.Description</p>
+                        <p class="card-text fw-bold text-info">Price: $@product.Price</p>
+
+                        <!-- Add a new Home controller with Details action -->
+                        <a asp-area="Customer" asp-controller="Home" asp-action="Details"
+                           asp-route-id="@product.Id" class="btn btn-outline-light mt-auto">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>

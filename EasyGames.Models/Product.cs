@@ -18,7 +18,6 @@ namespace EasyGames.Models
         [Required] // Ensure that the script in the SQL have a not null setting
         [DisplayName("Product Name")]
         [MaxLength(40)] // add max length of 40 char to name
-        [RegularExpression(@"^[A-Za-z\s]+$", ErrorMessage = "Product name must contain only letters.")]
         public string Name { get; set; }
         public string Description { get; set; }
         // add price between 0.01 to 10,000
