@@ -1,4 +1,6 @@
 using EasyGames.DataAccess.Data;
+using EasyGames.DataAccess.Repository;
+using EasyGames.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,7 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => // tell which class has the implementation of DbContext, which is Applicat...
-       options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); 
+       options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Registers CategoryRepository as the implementation for ICategoryRepository
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 var app = builder.Build();
 
