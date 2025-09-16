@@ -11,7 +11,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => // tell which cla
        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Registers CategoryRepository as the implementation for ICategoryRepository
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 

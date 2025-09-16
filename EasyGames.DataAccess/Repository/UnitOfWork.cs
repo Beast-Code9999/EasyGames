@@ -12,12 +12,12 @@ namespace EasyGames.DataAccess.Repository
     {
         // Reference to the application's database context
         private ApplicationDbContext _db;
-        public ICategoryRepository category { get; private set}
+        public ICategoryRepository Category { get; private set; }
         // injects the DbContext and passes it to the base repository as Constructor
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
-            category = new CategoryRepository(_db);
+            Category = new CategoryRepository(_db);
         }
      
 

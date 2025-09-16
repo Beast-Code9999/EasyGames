@@ -12,15 +12,15 @@ namespace EasyGames.Controllers
         // ApplicationDbContext name = new ApplicationDbContext();
 
         // Uses Dependency Injection to access the database via ApplicationDbContext
-        private readonly ICategoryRepository _categoryRepository;
-        public CategoryController(ICategoryRepository db )
+        private readonly IUnitOfWork _unitOfWork;
+        public CategoryController(IUnitOfWork unitOfWork )
         {
-            _categoryRepository = db;
+            _unitOfWork = unitOfWork;
         }
         public IActionResult Index() // action is Index
         {
             // Retrieves all categories from the database as a list
-            List<Category> objCategoryList = _categoryRepository.GetAll().ToList();
+            List<Category> objCategoryList = _unitOfWork.Category.GetAll().ToList();
             return View(objCategoryList);
         }
 
@@ -36,8 +36,8 @@ namespace EasyGames.Controllers
             // first check if obj is valid 
             if (ModelState.IsValid)
             {
-                _categoryRepository.Add(obj);
-                _categoryRepository.Save();
+                _unitOfWork.Category.Add(obj);
+                _unitOfWork.Save();
                 // add temporary data to show if successful
                 TempData["Success"] = "The category was created successfully!";
                 return RedirectToAction("Index"); // redirects back to index
@@ -54,7 +54,7 @@ namespace EasyGames.Controllers
                 return NotFound();
             }
 
-            Category? categoryFromDb = _categoryRepository.Get(u=>u.Id==id);
+            Category? categoryFromDb = _unitOfWork.Category.Get(u=>u.Id==id);
 
             // other ways of retrieving category
 
@@ -76,8 +76,8 @@ namespace EasyGames.Controllers
             if (ModelState.IsValid)
             {
                 // update the category
-                _categoryRepository.Update(obj);
-                _categoryRepository.Save();
+                _unitOfWork.Category.Update(obj);
+                _unitOfWork.Save();
                 TempData["Success"] = "The category was updated successfully!";
                 return RedirectToAction("Index"); // redirects back to index
             }
@@ -94,7 +94,7 @@ namespace EasyGames.Controllers
                 return NotFound();
             }
 
-            Category? categoryFromDb = _categoryRepository.Get(u => u.Id == id);
+            Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
 
             if (categoryFromDb == null) // if category is null
             {
@@ -107,7 +107,7 @@ namespace EasyGames.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePOST(int? id)
         {
-            Category? obj = _categoryRepository.Get(u => u.Id == id);
+            Category? obj = _unitOfWork.Category.Get(u => u.Id == id);
             // check if null
             if (obj == null)
             {
@@ -115,8 +115,8 @@ namespace EasyGames.Controllers
             }
             // if not null
             // Removes category from the Category table
-            _categoryRepository.Remove(obj);
-            _categoryRepository.Save();
+            _unitOfWork.Category.Remove(obj);
+            _unitOfWork.Save();
             TempData["Success"] = "The category was deleted successfully!";
 
             return RedirectToAction("Index");
