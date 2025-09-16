@@ -23,6 +23,9 @@
                 <label asp-for="Price" for="Price" class="form-label text-light"></label>
                 <input disabled asp-for="Price" id="Price" class="form-control bg-dark bg-opacity-25 border-secondary text-light" placeholder="Enter price" />
             </div>
+            <div class="mb-3">
+                <img src="@Model.ImageUrl" width="100%" />
+            </div>
 
             <!-- Responsive button layout using bootstrap -->
             <div class="d-flex flex-column flex-sm-row justify-content-between gap-2 pt-3">
