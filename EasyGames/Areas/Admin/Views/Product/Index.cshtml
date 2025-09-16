@@ -9,7 +9,7 @@
         </div>
         <div class="col-6 text-end">
             @* anchor tag to tell which controller and which action this button will take the user to *@
-            <a asp-controller="Product" asp-action="Create" class="btn btn-dark">
+            <a asp-controller="Product" asp-action="Upsert" class="btn btn-dark">
                 <i class="bi bi-plus-square m-1"></i>Create New Product
             </a>
         </div>
@@ -46,7 +46,7 @@
                 <td>
                     <div class="w-100 btn-group" role="group">
                         <!-- Use asp-route- to pass the ID of each product -->
-                        <a asp-controller="Product" asp-action="Edit" asp-route-Id="@obj.Id" class="btn btn-dark">
+                        <a asp-controller="Product" asp-action="Upsert" asp-route-Id="@obj.Id" class="btn btn-dark">
                             <i class="bi bi-pencil-square"></i> Edit
                         </a>
                             <a asp-controller="Product" asp-action="Delete" asp-route-Id="@obj.Id" class="btn btn-danger">

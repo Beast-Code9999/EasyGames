@@ -2,10 +2,11 @@
 
 <!-- Create a new product form with method post -->
 <form method="post" class="container mt-5" style="max-width: 600px;" enctype="multipart/form-data">
+    <input asp-for="Product.Id" hidden/>
     <div class="card bg-dark bg-opacity-50 border-0 shadow-lg rounded-4">
         <div class="card-body p-4">
             <div class="row pb-3 text-center">
-                <h2 class="fw-bold text-light">Create Product</h2>
+                <h2 class="fw-bold text-light">@(Model.Product.Id!=0?"Update":"Create") Product</h2>
                 <hr class="text-secondary" />
             </div>
 
@@ -36,8 +37,12 @@
                 <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Product.ImageUrl" for="Price" class="form-label text-light"></label>
-                <input type="file" id="Price" class="form-control bg-dark bg-opacity-25 border-secondary text-light" placeholder="Enter price" />
+                <label asp-for="Product.ImageUrl" for="ImageUrl" class="form-label text-light"></label>
+                <input type="file" name="file" id="ImageUrl" class="form-control bg-dark bg-opacity-25 border-secondary text-light" placeholder="Enter price" />
+            </div>
+
+            <div class="mb-3">
+                <img src="@Model.Product.ImageUrl" width="100%"/>
             </div>
 
             <!-- Responsive button layout using bootstrap -->
@@ -46,9 +51,15 @@
                    class="btn btn-outline-secondary w-100 w-sm-auto">
                     ← Back to List
                 </a>
-                <button type="submit" class="btn btn-outline-light w-100 w-sm-auto">
-                    Create
-                </button>
+                @if(Model.Product.Id != 0)
+                {
+                    <button type="submit" class="btn btn-outline-light w-100 w-sm-auto"> Update </button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-outline-light w-100 w-sm-auto"> Create </button>
+
+                }
             </div>
         </div>
     </div>

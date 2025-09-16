@@ -16,9 +16,13 @@ namespace EasyGames.Areas.Admin.Controllers
 
         // Uses Dependency Injection to access the database via ApplicationDbContext
         private readonly IUnitOfWork _unitOfWork;
-        public ProductController(IUnitOfWork unitOfWork )
+
+        // Inject iwebhost environment to save files in root folder
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index() // action is Index
         {
@@ -28,7 +32,7 @@ namespace EasyGames.Areas.Admin.Controllers
         }
 
         // Create new product
-        public IActionResult Create()
+        public IActionResult Upsert(int? id) // update and insert
         {
             // Fetches all categories from the database and maps them into a list 
             // of SelectListItem objects for use in a dropdown menu. Then creates 
@@ -46,15 +50,44 @@ namespace EasyGames.Areas.Admin.Controllers
                 CategoryList = CategoryList,
                 Product = new Product()
             };
-            return View(productVM);
+
+            if (id == null || id == 0) // If the product doesn't exist
+            {
+                return View(productVM);
+            }
+            else
+            {
+                // update the product 
+                productVM.Product = _unitOfWork.Product.Get(u=>u.Id==id);
+                return View(productVM);
+            }
         }
         // Handle Post requests
         [HttpPost]
-        public IActionResult Create(ProductVM productVM)
+        public IActionResult Upsert(ProductVM productVM, IFormFile? file)
         {
             // first check if obj is valid 
             if (ModelState.IsValid)
             {
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                // check if file is not null, then if not save it to the folder
+                if (file != null)
+                {
+                    // craete random string for file
+                    string filename = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string productPath = Path.Combine(wwwRootPath, @"images\product");
+
+                    // save image
+                    using (var fileStream = new FileStream(Path.Combine(productPath, filename), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+
+                    // save in model too
+
+                    productVM.Product.ImageUrl = @"\images\product\" + filename;
+                }
+
                 _unitOfWork.Product.Add(productVM.Product);
                 _unitOfWork.Save();
                 // add temporary data to show if successful
@@ -71,45 +104,6 @@ namespace EasyGames.Areas.Admin.Controllers
                 return View(productVM);
             }
                 
-        }
-
-        // Handle edit/UPDATE
-        public IActionResult Edit(int? id) // nullable field
-        {
-            // check if ID exists
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            Product? productFromDb = _unitOfWork.Product.Get(u=>u.Id==id);
-
-            // other ways of retrieving product
-
-            //Product? productFromDb1 = _db.Categories.FirstOrDefault(u=>u.Id==id);
-            //Product? productFromDb2 = _db.Categories.Where(u=>u.Id==id).FirstOrDefault();
-
-            if (productFromDb == null) // if product is null
-            {
-                return NotFound();
-            }
-
-            return View(productFromDb);
-        }
-        // Handle Post requests
-        [HttpPost]
-        public IActionResult Edit(Product obj)
-        {
-            // first check if obj is valid 
-            if (ModelState.IsValid)
-            {
-                // update the product
-                _unitOfWork.Product.Update(obj);
-                _unitOfWork.Save();
-                TempData["Success"] = "The product was updated successfully!";
-                return RedirectToAction("Index"); // redirects back to index
-            }
-            return View();
         }
 
 
