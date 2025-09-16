@@ -1,8 +1,11 @@
 using EasyGames.DataAccess.Data;
 using EasyGames.DataAccess.Repository;
 using EasyGames.DataAccess.Repository.IRepository;
-using Microsoft.EntityFrameworkCore;
+using EasyGames.Utility;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Build.Framework;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,14 +13,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => // tell which class has the implementation of DbContext, which is Applicat...
        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
+// include service to add identity role
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
 // Register configuration for razor pages
 builder.Services.AddRazorPages();
 
 // Registers CategoryRepository as the implementation for ICategoryRepository
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+// add services for IEmailSender
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 var app = builder.Build();
 
